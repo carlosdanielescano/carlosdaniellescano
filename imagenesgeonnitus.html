@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galería Dinámica</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+      }
+      .grid-container img {
+        width: 200px;
+        height: 200px; /* Hace que todas las miniaturas sean cuadradas */
+        object-fit: cover; /* Recorta la imagen sin deformarla */
+        cursor: pointer;
+        transition: transform 0.8s;
+      }
+      .grid-container img:hover {
+        transform: scale(1.2);
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+      .modal img {
+        max-width: 90%;
+        max-height: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container" id="gallery"></div>
+
+    <!-- Modal para ampliar la imagen -->
+    <div class="modal" id="modal" onclick="closeModal()">
+      <img id="modalImg" src="" />
+    </div>
+
+    <script>
+      // Array con las URLs de las imágenes
+      const imageUrls = [
+        "https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/460070028_448367627536675_7567763913707509655_n.jpg?v=1742508804341",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/460224767_885198229736104_1094640449791811993_n.jpg?v=1742508804583",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/460077416_1052791226455764_7364819878359259858_n.jpg?v=1742508805429",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/460119932_1882358638920516_103477392333739269_n.jpg?v=1742508806803",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/460099078_486231314230093_5509755529136854068_n.jpg?v=1742508808125",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/3.jpg?v=1742508811229",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/2.jpg?v=1742508814339",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/tumblr_inline_sjpfxxnyPe1qc4tww_500.jpg?v=1742508815666",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/876793-img-6400.jpg?v=1742508816871",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/credito-Javier-Areal-Velez-IMG_0612.jpg?v=1742508818330",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/470194604_18308881315201739_134047437925115532_n.jpg?v=1742508819732",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/470139238_18308881264201739_1678913361488137756_n.jpg?v=1742508821152",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/470197620_18308881606201739_2448705466225880039_n.jpg?v=1742508822662",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/470199769_18308881216201739_8857393963628238029_n.jpg?v=1742508824099",
+"https://cdn.glitch.global/af0da1ad-26f6-46be-8173-4ad963273e2b/470178466_18308881597201739_7549837347221945583_n.jpg?v=1742508825827"
+];
+      let currentIndex = 0; // Índice de la imagen actual
+
+      const gallery = document.getElementById("gallery");
+      const modal = document.getElementById("modal");
+      const modalImg = document.getElementById("modalImg");
+
+      // Cargar imágenes en la galería
+      function loadImages() {
+        imageUrls.forEach((url, index) => {
+          const img = document.createElement("img");
+          img.src = url;
+          img.onclick = () => openModal(index);
+          gallery.appendChild(img);
+        });
+      }
+
+      // Mostrar modal con la imagen seleccionada
+      function openModal(index) {
+        currentIndex = index;
+        modalImg.src = imageUrls[currentIndex];
+        modal.style.display = "flex";
+      }
+
+      // Cambiar a la siguiente imagen
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % imageUrls.length;
+        modalImg.src = imageUrls[currentIndex];
+      }
+
+      // Cerrar el modal si se hace click fuera de la imagen
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+
+      // Cambiar de imagen si se hace click en la imagen grande
+      modalImg.addEventListener("click", nextImage);
+
+      // Manejar gestos táctiles (swipe)
+      let touchStartX = 0;
+
+      modalImg.addEventListener("touchstart", (event) => {
+        touchStartX = event.touches[0].clientX;
+      });
+
+      modalImg.addEventListener("touchend", (event) => {
+        let touchEndX = event.changedTouches[0].clientX;
+        if (touchStartX - touchEndX > 50) {
+          nextImage(); // Deslizar a la izquierda → Siguiente imagen
+        }
+      });
+
+      // Cargar imágenes en la galería al inicio
+      loadImages();
+    </script>
+  </body>
+</html>
