@@ -9,10 +9,9 @@ body {
   top: 0;
   left: 0;
 }
-canvas {
-position: sticky
 
-  top: 0;
+canvas {
+  position: sticky top: 0;
   left: 0;
 
 }
@@ -59,55 +58,66 @@ nav a:hover {
 
 /* Estilos para los encabezados de la página */
 h1 {
-    font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: bold;
   color: #333;
-    display: flex;
-    justify-content: up;
-    align-items: Left;
-    gap: 5px;
-    font-size: 24px;
-  }
+  display: flex;
+  justify-content: up;
+  align-items: Left;
+  gap: 5px;
+  font-size: 24px;
+}
 
 
 .title-container {
-      font-family: "Montserrat", sans-serif;
-    font-weight: bold;
-   padding-left:50px; /* Añade espacio interno a la izquierda */
-    gap: 10px;
-    color: #333;
-    display: flex;
-  align-items: flex-start; /* Alinea el texto fijo con la primera línea */
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  padding-left: 50px;
+  /* Añade espacio interno a la izquierda */
+  gap: 10px;
+  color: #333;
+  display: flex;
+  align-items: flex-start;
+  /* Alinea el texto fijo con la primera línea */
   justify-content: flex-start;
-    width: 100%; /* Ocupa todo el ancho disponible */
-    font-size: 24px;
-  }
+  width: 100%;
+  /* Ocupa todo el ancho disponible */
+  font-size: 24px;
+}
 
-  .fixed-text {
-    white-space: nowrap; /* Evita que se divida en varias líneas */
-    flex-shrink: 0; /* Evita que se reduzca de tamaño */
-  }
+.fixed-text {
+  white-space: nowrap;
+  /* Evita que se divida en varias líneas */
+  flex-shrink: 0;
+  /* Evita que se reduzca de tamaño */
+}
 
-  #changing-text {
-    min-width: 250px; /* Ajusta según el texto más largo */
-     min-height: 3em; /* Espacio suficiente para 2 líneas */
- overflow: hidden; /* Evita que el texto sobrepase el espacio */
+#changing-text {
+  min-width: 250px;
+  /* Ajusta según el texto más largo */
+  min-height: 3em;
+  /* Espacio suficiente para 2 líneas */
+  overflow: hidden;
+  /* Evita que el texto sobrepase el espacio */
 
-    text-align: left;
-    display: inline-block;
-  }
+  text-align: left;
+  display: inline-block;
+}
+
 h2,
 h3 {
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   color: #333;
 }
+
 .lista-obras {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px; /* Espacio entre los elementos */
+  gap: 10px;
+  /* Espacio entre los elementos */
 }
 
 .lista-obras li {
@@ -116,8 +126,10 @@ h3 {
   border: 1px solid #ccc;
   border-radius: 10px;
   box-sizing: border-box;
-  width: 350px; /* Ancho fijo para cada elemento */
-  margin-bottom: 10px; /* Espacio inferior entre los elementos */
+  width: 350px;
+  /* Ancho fijo para cada elemento */
+  margin-bottom: 10px;
+  /* Espacio inferior entre los elementos */
   padding: 10px;
 }
 
@@ -149,9 +161,10 @@ h1 {
   margin-left: 20px;
   margin-right: 20px;
 }
+
 .destacado {
-            font-weight: bold;
-        }
+  font-weight: bold;
+}
 
 img {
   max-width: 100%;
@@ -160,6 +173,7 @@ img {
   margin: 0 auto;
   text-align: center;
 }
+
 .imag {
   max-width: 100%;
   height: auto;
@@ -218,13 +232,15 @@ img {
   background: linear-gradient(to right, #333, transparent);
   margin: 10px 0;
 }
+
 .linea-degradado-l {
   height: 2px;
   background: linear-gradient(to left, #333, transparent);
   margin: 10px 0;
 }
+
 .degradado {
- /* background: linear-gradient(to left, #f0f0f0, #ffffff);*/
+  /* background: linear-gradient(to left, #f0f0f0, #ffffff);*/
 }
 
 .contact-icons {
@@ -243,7 +259,7 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: center;
- 
+
   background-color: #f5f5f5;
 }
 
@@ -309,10 +325,10 @@ img {
 
 .button-container a {
   position: relative;
-  
+
   left: 50%;
   transform: translate(-50%, 0);
-  
+
   text-align: center;
 
   display: inline-block;
@@ -325,17 +341,16 @@ img {
 }
 
 .videos-container2 {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0px; /* Espacio entre los iframes */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0px;
+  /* Espacio entre los iframes */
 }
 
 
 @media (max-width: 600) {
-    .videos-container2 {
-        flex-direction: column; /* Apila los iframes verticalmente cuando el ancho de la pantalla es menor o igual a 600px */
-    }
+  .videos-container2 {
+    flex-direction: column;
+    /* Apila los iframes verticalmente cuando el ancho de la pantalla es menor o igual a 600px */
+  }
 }
-
-
-

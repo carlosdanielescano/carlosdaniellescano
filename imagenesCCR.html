@@ -1,137 +1,147 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Galería Dinámica</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f0f0f0;
-      }
-      .grid-container {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 10px;
-      }
-      .grid-container img {
-        width: 200px;
-        height: 200px; /* Hace que todas las miniaturas sean cuadradas */
-        object-fit: cover; /* Recorta la imagen sin deformarla */
-        cursor: pointer;
-        transition: transform 0.8s;
-      }
-      .grid-container img:hover {
-        transform: scale(1.2);
-      }
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        justify-content: center;
-        align-items: center;
-      }
-      .modal img {
-        max-width: 90%;
-        max-height: 90%;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="grid-container" id="gallery"></div>
 
-    <!-- Modal para ampliar la imagen -->
-    <div class="modal" id="modal" onclick="closeModal()">
-      <img id="modalImg" src="" />
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galería Dinámica</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
 
-    <script>
-      // Array con las URLs de las imágenes
-      const imageUrls = [
-        "archivos/Exercises%20for%20Acoustics%20of%20Memory-Sindicato%20Involuntario_compressed_page-0001.jpg",
-        "archivos/IMG_31932.jpg",
-        "archivos/24-11-13%20Apertura%20Memoria%20en%20gestacion%20(Sala%207%2C8%2C9)38.jpg",
-        "archivos/24-11-13%20Apertura%20Memoria%20en%20gestacion%20(Sala%207%2C8%2C9)39.jpg",
-        "archivos/24-11-13%20Apertura%20Memoria%20en%20gestacion%20(Sala%207%2C8%2C9)40.jpg",
-        "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)7.jpg",
-        "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)8.jpg",
-        "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)12.jpg",
-        "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)11.jpg",
-        "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)13.jpg",
-        "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)14.jpg",
-        "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)15.jpg",
-        "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)18.jpg",
-        "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)19.jpg",
-        "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)20.jpg",
-        "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)21.jpg",
-        "archivos/Exercises%20for%20Acoustics%20of%20Memory-Sindicato%20Involuntario_compressed_page-0133.jpg",
-        "archivos/Exercises%20for%20Acoustics%20of%20Memory-Sindicato%20Involuntario_compressed_page-0136.jpg",
-        "archivos/Exercises%20for%20Acoustics%20of%20Memory-Sindicato%20Involuntario_compressed_page-0138.jpg",
-        "archivos/Exercises%20for%20Acoustics%20of%20Memory-Sindicato%20Involuntario_compressed_page-0142.jpg",
-      ];
-      let currentIndex = 0; // Índice de la imagen actual
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
 
-      const gallery = document.getElementById("gallery");
-      const modal = document.getElementById("modal");
-      const modalImg = document.getElementById("modalImg");
+    .grid-container img {
+      width: 200px;
+      height: 200px;
+      /* Hace que todas las miniaturas sean cuadradas */
+      object-fit: cover;
+      /* Recorta la imagen sin deformarla */
+      cursor: pointer;
+      transition: transform 0.8s;
+    }
 
-      // Cargar imágenes en la galería
-      function loadImages() {
-        imageUrls.forEach((url, index) => {
-          const img = document.createElement("img");
-          img.src = url;
-          img.onclick = () => openModal(index);
-          gallery.appendChild(img);
-        });
-      }
+    .grid-container img:hover {
+      transform: scale(1.2);
+    }
 
-      // Mostrar modal con la imagen seleccionada
-      function openModal(index) {
-        currentIndex = index;
-        modalImg.src = imageUrls[currentIndex];
-        modal.style.display = "flex";
-      }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
 
-      // Cambiar a la siguiente imagen
-      function nextImage() {
-        currentIndex = (currentIndex + 1) % imageUrls.length;
-        modalImg.src = imageUrls[currentIndex];
-      }
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+  </style>
+</head>
 
-      // Cerrar el modal si se hace click fuera de la imagen
-      modal.addEventListener("click", (event) => {
-        if (event.target === modal) {
-          modal.style.display = "none";
-        }
+<body>
+  <div class="grid-container" id="gallery"></div>
+
+  <!-- Modal para ampliar la imagen -->
+  <div class="modal" id="modal" onclick="closeModal()">
+    <img id="modalImg" src="" />
+  </div>
+
+  <script>
+    // Array con las URLs de las imágenes
+    const imageUrls = [
+      "archivos/Exercises%20for%20Acoustics%20of%20Memory-Sindicato%20Involuntario_compressed_page-0001.jpg",
+      "archivos/IMG_31932.jpg",
+      "archivos/24-11-13%20Apertura%20Memoria%20en%20gestacion%20(Sala%207%2C8%2C9)38.jpg",
+      "archivos/24-11-13%20Apertura%20Memoria%20en%20gestacion%20(Sala%207%2C8%2C9)39.jpg",
+      "archivos/24-11-13%20Apertura%20Memoria%20en%20gestacion%20(Sala%207%2C8%2C9)40.jpg",
+      "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)7.jpg",
+      "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)8.jpg",
+      "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)12.jpg",
+      "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)11.jpg",
+      "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)13.jpg",
+      "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)14.jpg",
+      "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)15.jpg",
+      "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)18.jpg",
+      "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)19.jpg",
+      "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)20.jpg",
+      "archivos/24-11-13%20Vistas%20de%20sala%20Memoria%20en%20gestacion%20(salas%207-8-9)21.jpg",
+      "archivos/Exercises%20for%20Acoustics%20of%20Memory-Sindicato%20Involuntario_compressed_page-0133.jpg",
+      "archivos/Exercises%20for%20Acoustics%20of%20Memory-Sindicato%20Involuntario_compressed_page-0136.jpg",
+      "archivos/Exercises%20for%20Acoustics%20of%20Memory-Sindicato%20Involuntario_compressed_page-0138.jpg",
+      "archivos/Exercises%20for%20Acoustics%20of%20Memory-Sindicato%20Involuntario_compressed_page-0142.jpg",
+    ];
+    let currentIndex = 0; // Índice de la imagen actual
+
+    const gallery = document.getElementById("gallery");
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+
+    // Cargar imágenes en la galería
+    function loadImages() {
+      imageUrls.forEach((url, index) => {
+        const img = document.createElement("img");
+        img.src = url;
+        img.onclick = () => openModal(index);
+        gallery.appendChild(img);
       });
+    }
 
-      // Cambiar de imagen si se hace click en la imagen grande
-      modalImg.addEventListener("click", nextImage);
+    // Mostrar modal con la imagen seleccionada
+    function openModal(index) {
+      currentIndex = index;
+      modalImg.src = imageUrls[currentIndex];
+      modal.style.display = "flex";
+    }
 
-      // Manejar gestos táctiles (swipe)
-      let touchStartX = 0;
+    // Cambiar a la siguiente imagen
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % imageUrls.length;
+      modalImg.src = imageUrls[currentIndex];
+    }
 
-      modalImg.addEventListener("touchstart", (event) => {
-        touchStartX = event.touches[0].clientX;
-      });
+    // Cerrar el modal si se hace click fuera de la imagen
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
 
-      modalImg.addEventListener("touchend", (event) => {
-        let touchEndX = event.changedTouches[0].clientX;
-        if (touchStartX - touchEndX > 50) {
-          nextImage(); // Deslizar a la izquierda → Siguiente imagen
-        }
-      });
+    // Cambiar de imagen si se hace click en la imagen grande
+    modalImg.addEventListener("click", nextImage);
 
-      // Cargar imágenes en la galería al inicio
-      loadImages();
-    </script>
-  </body>
+    // Manejar gestos táctiles (swipe)
+    let touchStartX = 0;
+
+    modalImg.addEventListener("touchstart", (event) => {
+      touchStartX = event.touches[0].clientX;
+    });
+
+    modalImg.addEventListener("touchend", (event) => {
+      let touchEndX = event.changedTouches[0].clientX;
+      if (touchStartX - touchEndX > 50) {
+        nextImage(); // Deslizar a la izquierda → Siguiente imagen
+      }
+    });
+
+    // Cargar imágenes en la galería al inicio
+    loadImages();
+  </script>
+</body>
+
 </html>

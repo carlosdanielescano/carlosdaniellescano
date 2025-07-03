@@ -1,17 +1,17 @@
 var obras = [
-    { titulo: "AR para todes", archivo: "arparatodes" },
+  { titulo: "AR para todes", archivo: "arparatodes" },
   { titulo: "Nomofobia", archivo: "nomofobia" },
-    { titulo: "Grabación encadenada", archivo: "reregraba" },
-    { titulo: "Difusión estable", archivo: "difusion" },
-   { titulo: "Prácticas con figuras.", archivo: "practica" },
-    { titulo: "Que la pandenga se expanga", archivo: "pandenga" },
-    { titulo: "Escultura electrónica", archivo: "escultura" },
-    { titulo: "Glebas", archivo: "glebas" },
-  { titulo: "Pasaje Subterraneo, estación Ramos Mejía",  archivo: "pasaje_subterraneo"  },
+  { titulo: "Grabación encadenada", archivo: "reregraba" },
+  { titulo: "Difusión estable", archivo: "difusion" },
+  { titulo: "Prácticas con figuras.", archivo: "practica" },
+  { titulo: "Que la pandenga se expanga", archivo: "pandenga" },
+  { titulo: "Escultura electrónica", archivo: "escultura" },
+  { titulo: "Glebas", archivo: "glebas" },
+  { titulo: "Pasaje Subterraneo, estación Ramos Mejía", archivo: "pasaje_subterraneo" },
   { titulo: "Simbolos, la trampa de la reconstrucción", archivo: "simbolos" },
   { titulo: "La nueva matemática de Benford", archivo: "benford" },
-  { titulo: "Dos ciclos de recomposición para 9 bis",   archivo: "Dos_ciclos_de_recomposición_para_9_bis" },
-  { titulo: "Retícula Rizomática [imagen de pensamiento]", archivo: "reticula"  },
+  { titulo: "Dos ciclos de recomposición para 9 bis", archivo: "Dos_ciclos_de_recomposición_para_9_bis" },
+  { titulo: "Retícula Rizomática [imagen de pensamiento]", archivo: "reticula" },
   { titulo: "La sombra de la bicicleta", archivo: "sombra" },
   { titulo: "La Máquina de ventilar", archivo: "ventilar" },
   { titulo: "NoiXY", archivo: "noixy" },
@@ -31,12 +31,12 @@ var obras = [
   { titulo: "Un punto en comun", archivo: "puntocomun" },
   { titulo: "La televisión (El origen - La vida)", archivo: "latele" },
   { titulo: "Cuarteles de Ciudadela", archivo: "cuarteles" },
-   { titulo: "GEONNITUS. Una instalación audiovisual sobre el fracking", archivo: "Geonnitus" },
+  { titulo: "GEONNITUS. Una instalación audiovisual sobre el fracking", archivo: "Geonnitus" },
   { titulo: "Interfaz del oeste - ¿Cómo queremos vivir juntxs?", archivo: "interfazoeste" },
-   { titulo: "Memoria de un eco", archivo: "memoriadeuneco" },
+  { titulo: "Memoria de un eco", archivo: "memoriadeuneco" },
   { titulo: "El libro... Digitalizado", archivo: "ellibro2025" },
-  
-   
+
+
 ];
 
 function cargarContenido(pagina) {
@@ -72,8 +72,8 @@ function cargarObras() {
   obrasList.className = "lista-obras"; // Agregar clase
 
   // Recorrer la lista de obras y crear un elemento de lista para cada obra
-  for (var i = obras.length-1; i >= 0; i--) {
-   
+  for (var i = obras.length - 1; i >= 0; i--) {
+
     var obra = obras[i];
 
     // Crear un elemento de lista
@@ -87,7 +87,7 @@ function cargarObras() {
       // Agregar un evento de clic al elemento de lista
       obraItem.addEventListener("click", function () {
         cargarContenidoObra(obra.archivo);
-               scrollToTop(); // Asegurar que haga scroll al inicio
+        scrollToTop(); // Asegurar que haga scroll al inicio
       });
     })(obra);
 
@@ -121,7 +121,7 @@ function cargarContenidoObra(pagina) {
 }
 
 function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 
@@ -141,23 +141,23 @@ window.addEventListener("load", function () {
   }
 });
 const texts = [
-    "Arte, tecnología y memoria",
-    "Exploración digital y archivo",
-    "Imagen, sonido y experimentación",
-    "Datos, interfaces y procesos",
-    "Narrativas visuales y sonoras",
-    "Materialidad del video y remix gráfico",
-    "Interpretación y manipulación de datos",
-    "Tiempo, historia y futuros posibles",
-    "Cartografías afectivas y territorios",
-    "Performance audiovisual",
-    "Experimentación colectiva",
-    "Ecos, repeticiones y archivo personal"
+  "Arte, tecnología y memoria",
+  "Exploración digital y archivo",
+  "Imagen, sonido y experimentación",
+  "Datos, interfaces y procesos",
+  "Narrativas visuales y sonoras",
+  "Materialidad del video y remix gráfico",
+  "Interpretación y manipulación de datos",
+  "Tiempo, historia y futuros posibles",
+  "Cartografías afectivas y territorios",
+  "Performance audiovisual",
+  "Experimentación colectiva",
+  "Ecos, repeticiones y archivo personal"
 ];
-  let index = 0;
-  function changeText() {
-    index = (index + 1) % texts.length;
-    document.getElementById("changing-text").textContent = texts[index];
-  }
+let index = 0;
+function changeText() {
+  index = (index + 1) % texts.length;
+  document.getElementById("changing-text").textContent = texts[index];
+}
 
-  setInterval(changeText, 500); // Cambia cada 3 segundos
+setInterval(changeText, 500); // Cambia cada 3 segundos
